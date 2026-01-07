@@ -83,6 +83,8 @@ export default function SignupPage() {
         return;
       }
 
+      console.log('Starting signup process...');
+
       // Call signup API
       const response = await fetch('/api/auth/signup', {
         method: 'POST',
@@ -107,23 +109,36 @@ export default function SignupPage() {
       const data = await response.json();
 
       if (!response.ok) {
+        console.error('Signup failed:', data.error);
         alert(data.error || 'Failed to create account');
         return;
       }
+
+      console.log('Signup successful, attempting auto-login...');
 
       // Success - auto-login the user
       const result = await signIn('credentials', {
         email: formData.email,
         password: formData.password,
         redirect: false,
+        callbackUrl: '/dashboard?welcome=true',
       });
 
+      console.log('SignIn result:', result);
+
       if (result?.ok) {
-        // Redirect to dashboard with welcome parameter
-        window.location.href = '/dashboard?welcome=true';
+        console.log('Login successful, redirecting to dashboard...');
+        // Use router.push with a small delay to ensure session is set
+        setTimeout(() => {
+          window.location.href = '/dashboard?welcome=true';
+        }, 100);
+      } else if (result?.error) {
+        console.error('Auto-login failed:', result.error);
+        alert('Account created but auto-login failed. Please sign in manually.');
+        window.location.href = '/login';
       } else {
-        // If auto-login fails, redirect to login page
-        window.location.href = '/login?registered=true';
+        console.error('Unknown login error');
+        window.location.href = '/login';
       }
     } catch (error) {
       console.error('Signup error:', error);

@@ -329,7 +329,7 @@ export default function DashboardOverview() {
                     Register New Project
                   </button>
                 </Link>
-                <Link href="/dashboard/financial">
+                <Link href="/demo/calculator">
                   <button className="w-full py-2 px-4 bg-white border border-gray-300 text-foreground rounded-lg hover:bg-muted transition font-medium text-sm">
                     Calculate Finances
                   </button>
