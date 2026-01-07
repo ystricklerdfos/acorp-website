@@ -1,0 +1,381 @@
+'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/shared/Button';
+
+// This would come from authentication in production
+const SAMPLE_USER = {
+  name: 'Jane Doe',
+  email: 'jane@example.com',
+  username: 'janedoe',
+  profileComplete: 85,
+  project: {
+    name: 'Resonance Collective',
+    entityType: 'Cooperative',
+    status: 'Pre-registered',
+  },
+  connections: 24,
+  views: 156,
+};
+
+export default function DashboardPage() {
+  type TabType = 'overview' | 'profile' | 'project' | 'connections';
+  const [activeTab, setActiveTab] = useState<TabType>('overview');
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 py-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+              <p className="text-gray-600">Welcome back, {SAMPLE_USER.name}</p>
+            </div>
+            <div className="flex items-center gap-4">
+              <Link href={`/profile/${SAMPLE_USER.username}`}>
+                <Button variant="secondary">View Public Profile</Button>
+              </Link>
+              <Link href="/">
+                <Button variant="text">Back to Site</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Tabs */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <nav className="flex gap-8">
+            {[
+              { id: 'overview', label: 'Overview' },
+              { id: 'profile', label: 'Profile' },
+              { id: 'project', label: 'Project' },
+              { id: 'connections', label: 'Connections' },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as TabType)}
+                className={`py-4 px-2 border-b-2 font-medium transition-colors ${
+                  activeTab === tab.id
+                    ? 'border-gray-900 text-gray-900'
+                    : 'border-transparent text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </nav>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        {/* Overview Tab */}
+        {activeTab === 'overview' && (
+          <div className="space-y-8">
+            {/* Stats Grid */}
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="bg-white p-6 rounded-lg border border-gray-200">
+                <div className="text-sm text-gray-600 mb-1">Profile Completion</div>
+                <div className="text-3xl font-bold text-gray-900 mb-2">
+                  {SAMPLE_USER.profileComplete}%
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    className="bg-gray-900 h-2 rounded-full"
+                    style={{ width: `${SAMPLE_USER.profileComplete}%` }}
+                  />
+                </div>
+              </div>
+
+              <div className="bg-white p-6 rounded-lg border border-gray-200">
+                <div className="text-sm text-gray-600 mb-1">Profile Views</div>
+                <div className="text-3xl font-bold text-gray-900">{SAMPLE_USER.views}</div>
+                <div className="text-sm text-green-600 mt-1">↑ 12% this week</div>
+              </div>
+
+              <div className="bg-white p-6 rounded-lg border border-gray-200">
+                <div className="text-sm text-gray-600 mb-1">Connections</div>
+                <div className="text-3xl font-bold text-gray-900">{SAMPLE_USER.connections}</div>
+                <div className="text-sm text-gray-600 mt-1">artists & creators</div>
+              </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div className="bg-white p-6 rounded-lg border border-gray-200">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                <Link
+                  href="/dashboard?tab=profile"
+                  className="p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
+                >
+                  <h3 className="font-bold text-gray-900 mb-1">Complete Your Profile</h3>
+                  <p className="text-sm text-gray-600">
+                    Add more details to help others discover you
+                  </p>
+                </Link>
+
+                <Link
+                  href="/community"
+                  className="p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
+                >
+                  <h3 className="font-bold text-gray-900 mb-1">Explore Community</h3>
+                  <p className="text-sm text-gray-600">
+                    Connect with other artists and projects
+                  </p>
+                </Link>
+
+                <Link
+                  href="/programs/law"
+                  className="p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
+                >
+                  <h3 className="font-bold text-gray-900 mb-1">Learn About A-Corps</h3>
+                  <p className="text-sm text-gray-600">
+                    Explore the new legal structure for artists
+                  </p>
+                </Link>
+
+                <Link
+                  href="/pledge"
+                  className="p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors"
+                >
+                  <h3 className="font-bold text-gray-900 mb-1">Sign the Pledge</h3>
+                  <p className="text-sm text-gray-600">
+                    Join the movement for creative worker power
+                  </p>
+                </Link>
+              </div>
+            </div>
+
+            {/* Project Status */}
+            <div className="bg-white p-6 rounded-lg border border-gray-200">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">Your Project</h2>
+              <div className="flex items-start justify-between">
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-1">
+                    {SAMPLE_USER.project.name}
+                  </h3>
+                  <div className="flex gap-3 text-sm text-gray-600">
+                    <span>{SAMPLE_USER.project.entityType}</span>
+                    <span>•</span>
+                    <span className="text-orange-600 font-medium">
+                      {SAMPLE_USER.project.status}
+                    </span>
+                  </div>
+                </div>
+                <Button onClick={() => setActiveTab('project')}>Manage Project</Button>
+              </div>
+            </div>
+
+            {/* Recent Activity */}
+            <div className="bg-white p-6 rounded-lg border border-gray-200">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">Recent Activity</h2>
+              <div className="space-y-4">
+                <div className="flex items-start gap-4 pb-4 border-b border-gray-100">
+                  <div className="w-2 h-2 bg-gray-900 rounded-full mt-2" />
+                  <div className="flex-1">
+                    <p className="text-gray-900">
+                      <span className="font-medium">Marcus Chen</span> viewed your profile
+                    </p>
+                    <p className="text-sm text-gray-600">2 hours ago</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 pb-4 border-b border-gray-100">
+                  <div className="w-2 h-2 bg-gray-900 rounded-full mt-2" />
+                  <div className="flex-1">
+                    <p className="text-gray-900">
+                      <span className="font-medium">Sarah Kim</span> connected with you
+                    </p>
+                    <p className="text-sm text-gray-600">1 day ago</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-2 h-2 bg-gray-900 rounded-full mt-2" />
+                  <div className="flex-1">
+                    <p className="text-gray-900">You updated your project information</p>
+                    <p className="text-sm text-gray-600">3 days ago</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Profile Tab */}
+        {activeTab === 'profile' && (
+          <div className="max-w-3xl">
+            <div className="bg-white p-8 rounded-lg border border-gray-200">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Edit Profile</h2>
+
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    defaultValue={SAMPLE_USER.name}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
+                    Username
+                  </label>
+                  <input
+                    type="text"
+                    defaultValue={SAMPLE_USER.username}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    defaultValue={SAMPLE_USER.email}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
+                    Bio
+                  </label>
+                  <textarea
+                    rows={5}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                    placeholder="Tell us about your creative practice..."
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
+                    Location
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="City, State"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                  />
+                </div>
+
+                <div className="flex gap-4 pt-4">
+                  <Button>Save Changes</Button>
+                  <Button variant="secondary">Cancel</Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Project Tab */}
+        {activeTab === 'project' && (
+          <div className="max-w-3xl">
+            <div className="bg-white p-8 rounded-lg border border-gray-200">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">Manage Project</h2>
+
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
+                    Project Name
+                  </label>
+                  <input
+                    type="text"
+                    defaultValue={SAMPLE_USER.project.name}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
+                    Entity Type
+                  </label>
+                  <select
+                    defaultValue={SAMPLE_USER.project.entityType}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                  >
+                    <option value="Individual">Individual / Sole Proprietor</option>
+                    <option value="LLC">LLC</option>
+                    <option value="S-Corp">S-Corp</option>
+                    <option value="C-Corp">C-Corp</option>
+                    <option value="Nonprofit">Nonprofit</option>
+                    <option value="Cooperative">Cooperative</option>
+                    <option value="A-Corp">Artist Corporation (A-Corp)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
+                    Description
+                  </label>
+                  <textarea
+                    rows={5}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                    placeholder="Describe your project..."
+                  />
+                </div>
+
+                <div className="flex gap-4 pt-4">
+                  <Button>Save Changes</Button>
+                  <Button variant="secondary">Cancel</Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Connections Tab */}
+        {activeTab === 'connections' && (
+          <div>
+            <div className="bg-white p-6 rounded-lg border border-gray-200 mb-6">
+              <input
+                type="search"
+                placeholder="Search connections..."
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+              />
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                { name: 'Marcus Chen', role: 'Sound Designer', location: 'Los Angeles, CA' },
+                { name: 'Sarah Kim', role: 'Arts Administrator', location: 'Brooklyn, NY' },
+                { name: 'David Park', role: 'Visual Artist', location: 'Portland, OR' },
+                { name: 'Lisa Wang', role: 'Filmmaker', location: 'San Francisco, CA' },
+              ].map((connection, index) => (
+                <div
+                  key={index}
+                  className="bg-white p-6 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <h3 className="text-lg font-bold text-gray-900">{connection.name}</h3>
+                      <p className="text-gray-600">{connection.role}</p>
+                      <p className="text-sm text-gray-500">{connection.location}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="secondary" className="text-sm">
+                      Message
+                    </Button>
+                    <Button variant="text" className="text-sm">
+                      View Profile
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
