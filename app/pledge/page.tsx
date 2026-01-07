@@ -31,16 +31,14 @@ export default function PledgePage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-black relative overflow-hidden">
-        {/* Animated background patterns */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-20 left-10 w-64 h-64 bg-gradient-to-br from-cyan-500 to-purple-600 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-tr from-pink-500 to-yellow-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-gradient-to-bl from-green-500 to-blue-600 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+      <div className="min-h-screen bg-white relative overflow-hidden">
+        {/* Bauhaus geometric shapes background */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-red-600 opacity-10 rounded-full"></div>
+          <div className="absolute top-20 right-10 w-40 h-40 bg-blue-600 opacity-20"></div>
+          <div className="absolute bottom-0 right-0 w-72 h-72 bg-yellow-400 opacity-15 rotate-45"></div>
+          <div className="absolute top-1/3 left-1/4 w-32 h-64 bg-black opacity-5 -rotate-12"></div>
         </div>
-
-        {/* Grid overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 text-center">
             <div className="mb-6">
@@ -96,145 +94,172 @@ export default function PledgePage() {
   }
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Animated background blobs */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-cyan-400 via-blue-500 to-purple-600 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-pink-500 via-red-500 to-orange-500 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-0 left-1/3 w-[600px] h-[600px] bg-gradient-to-tr from-green-400 via-emerald-500 to-teal-600 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 right-1/4 w-80 h-80 bg-gradient-to-br from-yellow-400 via-amber-500 to-orange-600 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+    <div className="min-h-screen bg-gray-50 relative overflow-hidden">
+      {/* Bauhaus geometric background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Large red circle */}
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-red-600 rounded-full opacity-15"></div>
+        {/* Blue square */}
+        <div className="absolute top-40 right-20 w-48 h-48 bg-blue-600 opacity-20 rotate-12"></div>
+        {/* Yellow triangle (approximated with rotated square) */}
+        <div className="absolute bottom-20 left-10 w-64 h-64 bg-yellow-400 opacity-15 rotate-45"></div>
+        {/* Small black circle */}
+        <div className="absolute top-1/3 left-1/2 w-24 h-24 bg-black rounded-full opacity-10"></div>
+        {/* Red rectangle */}
+        <div className="absolute bottom-1/4 right-1/4 w-56 h-32 bg-red-600 opacity-10 -rotate-6"></div>
       </div>
 
-      {/* Grid overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-
-      {/* Scanline effect */}
-      <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,255,255,0.02)_50%)] bg-[size:100%_4px] pointer-events-none"></div>
-
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
-          <Link href="/" className="text-sm text-cyan-400 hover:text-cyan-300 mb-4 inline-block font-mono">
-            ← Back to A-Corp
+        <div className="mb-16">
+          <Link href="/" className="inline-block mb-8 text-sm font-bold text-black hover:text-red-600 transition-colors uppercase tracking-wider">
+            ← Back
           </Link>
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-pink-500 to-yellow-400 bg-clip-text text-transparent animate-pulse">
-            Sign the Pledge
-          </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto font-light">
-            Join creative workers around the world in building economic and political power for artists
-          </p>
-          <div className="mt-4 inline-block px-4 py-1 bg-pink-500/20 border border-pink-500 rounded-full">
-            <span className="text-pink-400 text-sm font-mono">1,247 artists have signed</span>
+
+          {/* Bauhaus-style asymmetric header */}
+          <div className="relative">
+            <div className="absolute -left-4 top-0 w-2 h-full bg-red-600"></div>
+            <h1 className="text-6xl md:text-8xl font-black mb-6 leading-none uppercase tracking-tight">
+              <span className="block">Sign</span>
+              <span className="block text-red-600">the</span>
+              <span className="block">Pledge</span>
+            </h1>
+          </div>
+
+          <div className="flex items-start gap-6 mt-8">
+            <div className="w-20 h-20 bg-blue-600 flex-shrink-0"></div>
+            <div>
+              <p className="text-xl font-light max-w-2xl">
+                Join creative workers around the world in building economic and political power for artists
+              </p>
+              <div className="mt-4 inline-flex items-center gap-2 bg-yellow-400 px-4 py-2">
+                <div className="w-3 h-3 bg-black rounded-full"></div>
+                <span className="font-bold text-sm uppercase">1,247 artists have signed</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 gap-12 mb-16">
           {/* The Pledge */}
-          <div className="bg-black/40 backdrop-blur-xl border-2 border-cyan-500/50 rounded-2xl shadow-2xl p-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-pink-500/20 to-transparent rounded-bl-full"></div>
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-cyan-500/20 to-transparent rounded-tr-full"></div>
+          <div className="bg-white border-8 border-black p-10 relative">
+            {/* Bauhaus accent shapes */}
+            <div className="absolute -top-4 -right-4 w-16 h-16 bg-red-600 rounded-full"></div>
+            <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-yellow-400"></div>
 
-            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500 mb-6 relative z-10">
-              The A-Corp Pledge
-            </h2>
-            <div className="space-y-6 relative z-10">
-              <p className="text-xl leading-relaxed text-white font-light border-l-4 border-pink-500 pl-4 italic">
-                "I believe that creative workers deserve economic security, political representation, and ownership of their work."
-              </p>
+            <div className="relative">
+              <div className="mb-8">
+                <div className="w-20 h-1 bg-red-600 mb-4"></div>
+                <h2 className="text-4xl font-black uppercase leading-tight">
+                  The A-Corp Pledge
+                </h2>
+              </div>
 
-              <p className="text-gray-300 font-semibold">By signing this pledge, I commit to:</p>
+              <div className="space-y-6">
+                <blockquote className="text-2xl font-light leading-relaxed border-l-6 border-blue-600 pl-6 italic">
+                  "I believe that creative workers deserve economic security, political representation, and ownership of their work."
+                </blockquote>
 
-              <ul className="space-y-3 list-none pl-0">
-                <li className="flex items-start gap-3 group">
-                  <span className="text-cyan-400 mt-1 text-xl group-hover:scale-110 transition-transform">→</span>
-                  <span className="text-gray-200">Supporting the creation of Artist Corporation (A-Corp) legal structures</span>
-                </li>
-                <li className="flex items-start gap-3 group">
-                  <span className="text-pink-400 mt-1 text-xl group-hover:scale-110 transition-transform">→</span>
-                  <span className="text-gray-200">Advocating for policies that protect creative workers' rights</span>
-                </li>
-                <li className="flex items-start gap-3 group">
-                  <span className="text-yellow-400 mt-1 text-xl group-hover:scale-110 transition-transform">→</span>
-                  <span className="text-gray-200">Building community and sharing resources with fellow artists</span>
-                </li>
-                <li className="flex items-start gap-3 group">
-                  <span className="text-green-400 mt-1 text-xl group-hover:scale-110 transition-transform">→</span>
-                  <span className="text-gray-200">Promoting ownership and equity over exploitation</span>
-                </li>
-              </ul>
-            </div>
+                <p className="font-bold uppercase text-sm tracking-wider">By signing this pledge, I commit to:</p>
 
-            <div className="mt-6 p-4 bg-gradient-to-r from-pink-500/10 to-cyan-500/10 border border-pink-500/30 rounded-lg relative z-10">
-              <p className="text-sm text-cyan-400 font-mono">
-                <strong className="text-white">The future is ours:</strong> Artists worldwide are reclaiming power
-              </p>
+                <ul className="space-y-4 list-none">
+                  <li className="flex items-start gap-4">
+                    <div className="w-6 h-6 bg-red-600 flex-shrink-0 mt-1"></div>
+                    <span className="text-lg">Supporting the creation of Artist Corporation (A-Corp) legal structures</span>
+                  </li>
+                  <li className="flex items-start gap-4">
+                    <div className="w-6 h-6 bg-blue-600 flex-shrink-0 mt-1 rounded-full"></div>
+                    <span className="text-lg">Advocating for policies that protect creative workers' rights</span>
+                  </li>
+                  <li className="flex items-start gap-4">
+                    <div className="w-6 h-6 bg-yellow-400 flex-shrink-0 mt-1 rotate-45"></div>
+                    <span className="text-lg">Building community and sharing resources with fellow artists</span>
+                  </li>
+                  <li className="flex items-start gap-4">
+                    <div className="w-6 h-6 bg-black flex-shrink-0 mt-1"></div>
+                    <span className="text-lg">Promoting ownership and equity over exploitation</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mt-8 p-6 bg-yellow-400">
+                <p className="text-sm font-bold uppercase">
+                  The future is ours: Artists worldwide are reclaiming power
+                </p>
+              </div>
             </div>
           </div>
 
           {/* Sign Form */}
-          <div className="bg-black/40 backdrop-blur-xl border-2 border-pink-500/50 rounded-2xl shadow-2xl p-8 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-40 h-40 bg-gradient-to-br from-cyan-500/20 to-transparent rounded-br-full"></div>
+          <div className="bg-white border-8 border-blue-600 p-10 relative">
+            {/* Bauhaus accent shapes */}
+            <div className="absolute -top-4 -left-4 w-16 h-16 bg-yellow-400 rotate-45"></div>
+            <div className="absolute -bottom-4 -right-4 w-14 h-14 bg-red-600 rounded-full"></div>
 
-            <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-yellow-400 mb-6 relative z-10">
-              Add Your Name
-            </h2>
-
-            <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
-              <div>
-                <label htmlFor="name" className="block text-sm font-bold text-cyan-400 mb-2 font-mono">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  required
-                  value={formData.name}
-                  onChange={(e) => updateField('name', e.target.value)}
-                  className="w-full px-4 py-3 bg-black/50 border-2 border-cyan-500/50 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 text-white placeholder-gray-500 transition-all"
-                  placeholder="Your full name"
-                />
+            <div className="relative">
+              <div className="mb-8">
+                <div className="w-20 h-1 bg-blue-600 mb-4"></div>
+                <h2 className="text-4xl font-black uppercase leading-tight">
+                  Add Your Name
+                </h2>
               </div>
 
-              <div>
-                <label htmlFor="email" className="block text-sm font-bold text-pink-400 mb-2 font-mono">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => updateField('email', e.target.value)}
-                  className="w-full px-4 py-3 bg-black/50 border-2 border-pink-500/50 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 text-white placeholder-gray-500 transition-all"
-                  placeholder="you@example.com"
-                />
-              </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider mb-3">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    required
+                    value={formData.name}
+                    onChange={(e) => updateField('name', e.target.value)}
+                    className="w-full px-4 py-4 border-4 border-black focus:border-red-600 focus:outline-none transition-colors text-lg"
+                    placeholder="Your full name"
+                  />
+                </div>
 
-              <div>
-                <label htmlFor="organization" className="block text-sm font-bold text-yellow-400 mb-2 font-mono">
-                  Organization / Project (Optional)
-                </label>
-                <input
-                  type="text"
-                  id="organization"
-                  value={formData.organization}
-                  onChange={(e) => updateField('organization', e.target.value)}
-                  className="w-full px-4 py-3 bg-black/50 border-2 border-yellow-500/50 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-white placeholder-gray-500 transition-all"
-                  placeholder="Your band, company, or collective"
-                />
-              </div>
+                <div>
+                  <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider mb-3">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => updateField('email', e.target.value)}
+                    className="w-full px-4 py-4 border-4 border-black focus:border-blue-600 focus:outline-none transition-colors text-lg"
+                    placeholder="you@example.com"
+                  />
+                </div>
 
-              <div>
-                <label htmlFor="role" className="block text-sm font-bold text-green-400 mb-2 font-mono">
-                  Role / Discipline *
-                </label>
-                <select
-                  id="role"
-                  required
-                  value={formData.role}
-                  onChange={(e) => updateField('role', e.target.value)}
-                  className="w-full px-4 py-3 bg-black/50 border-2 border-green-500/50 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 text-white transition-all"
-                >
+                <div>
+                  <label htmlFor="organization" className="block text-xs font-bold uppercase tracking-wider mb-3">
+                    Organization / Project (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    id="organization"
+                    value={formData.organization}
+                    onChange={(e) => updateField('organization', e.target.value)}
+                    className="w-full px-4 py-4 border-4 border-black focus:border-yellow-400 focus:outline-none transition-colors text-lg"
+                    placeholder="Your band, company, or collective"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="role" className="block text-xs font-bold uppercase tracking-wider mb-3">
+                    Role / Discipline *
+                  </label>
+                  <select
+                    id="role"
+                    required
+                    value={formData.role}
+                    onChange={(e) => updateField('role', e.target.value)}
+                    className="w-full px-4 py-4 border-4 border-black focus:border-red-600 focus:outline-none transition-colors text-lg"
+                  >
                   <option value="">Select your role</option>
                   <option value="musician">Musician</option>
                   <option value="visual-artist">Visual Artist</option>
@@ -250,81 +275,94 @@ export default function PledgePage() {
                 </select>
               </div>
 
-              <div className="flex items-start gap-3 pt-2">
-                <input
-                  type="checkbox"
-                  id="agreeToTerms"
-                  required
-                  checked={formData.agreeToTerms}
-                  onChange={(e) => updateField('agreeToTerms', e.target.checked)}
-                  className="mt-1 w-5 h-5 text-cyan-500 bg-black/50 border-2 border-cyan-500/50 rounded focus:ring-2 focus:ring-cyan-500"
-                />
-                <label htmlFor="agreeToTerms" className="text-sm text-gray-300">
-                  I agree to receive updates about the A-Corp movement and understand that my name may be displayed publicly as a pledge signer *
-                </label>
-              </div>
+                <div className="flex items-start gap-4 pt-2">
+                  <input
+                    type="checkbox"
+                    id="agreeToTerms"
+                    required
+                    checked={formData.agreeToTerms}
+                    onChange={(e) => updateField('agreeToTerms', e.target.checked)}
+                    className="mt-1 w-6 h-6 border-4 border-black"
+                  />
+                  <label htmlFor="agreeToTerms" className="text-sm font-light">
+                    I agree to receive updates about the A-Corp movement and understand that my name may be displayed publicly as a pledge signer *
+                  </label>
+                </div>
 
-              <button
-                type="submit"
-                disabled={submitting}
-                className="w-full py-4 px-6 bg-gradient-to-r from-cyan-500 via-pink-500 to-yellow-500 text-black rounded-lg hover:scale-105 transition-all font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-[0_0_20px_rgba(34,211,238,0.5)]"
-              >
-                {submitting ? 'SIGNING PLEDGE...' : 'SIGN THE PLEDGE →'}
-              </button>
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-full py-5 px-8 bg-red-600 text-white hover:bg-black transition-colors font-black text-xl uppercase disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {submitting ? 'Signing...' : 'Sign the Pledge'}
+                </button>
 
-              <p className="text-xs text-gray-400 text-center font-mono">
-                JOIN THE RESISTANCE // RECLAIM YOUR POWER
-              </p>
+                <div className="text-center pt-4">
+                  <div className="inline-flex items-center gap-2">
+                    <div className="w-3 h-3 bg-yellow-400"></div>
+                    <p className="text-xs font-bold uppercase tracking-wider">
+                      Join the Movement
+                    </p>
+                    <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
+                  </div>
+                </div>
             </form>
           </div>
         </div>
 
         {/* Why Sign Section */}
-        <div className="bg-black/40 backdrop-blur-xl border-2 border-gradient-to-r from-cyan-500 to-pink-500 rounded-2xl shadow-2xl p-8 mb-8 relative overflow-hidden">
-          <div className="absolute top-0 left-1/2 w-64 h-64 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
+        <div className="bg-black text-white p-12 mb-12 relative">
+          {/* Bauhaus accent shapes */}
+          <div className="absolute top-0 left-0 w-32 h-32 bg-red-600 opacity-50"></div>
+          <div className="absolute bottom-0 right-0 w-24 h-24 bg-yellow-400 rounded-full opacity-50"></div>
 
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-pink-500 to-yellow-400 relative z-10">
-            Why Sign the Pledge?
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8 relative z-10">
-            <div className="text-center group hover:scale-105 transition-transform">
-              <div className="w-20 h-20 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(34,211,238,0.4)] group-hover:shadow-[0_0_30px_rgba(34,211,238,0.6)] transition-shadow">
-                <span className="text-4xl">⚡</span>
-              </div>
-              <h3 className="font-bold text-cyan-400 mb-2 text-lg">Build Community</h3>
-              <p className="text-sm text-gray-300">
-                Connect with thousands of creative workers who share your values and goals
-              </p>
+          <div className="relative">
+            <div className="mb-12">
+              <div className="w-32 h-2 bg-yellow-400 mb-6"></div>
+              <h2 className="text-5xl md:text-6xl font-black uppercase leading-none">
+                Why Sign<br />the Pledge?
+              </h2>
             </div>
 
-            <div className="text-center group hover:scale-105 transition-transform">
-              <div className="w-20 h-20 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(236,72,153,0.4)] group-hover:shadow-[0_0_30px_rgba(236,72,153,0.6)] transition-shadow">
-                <span className="text-4xl">🔊</span>
+            <div className="grid md:grid-cols-3 gap-10">
+              <div>
+                <div className="w-20 h-20 bg-red-600 mb-6"></div>
+                <h3 className="font-black uppercase text-xl mb-4">Build Community</h3>
+                <p className="font-light text-gray-300">
+                  Connect with thousands of creative workers who share your values and goals
+                </p>
               </div>
-              <h3 className="font-bold text-pink-400 mb-2 text-lg">Amplify Your Voice</h3>
-              <p className="text-sm text-gray-300">
-                Show legislators and industry leaders that creative workers demand change
-              </p>
-            </div>
 
-            <div className="text-center group hover:scale-105 transition-transform">
-              <div className="w-20 h-20 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center mx-auto mb-4 shadow-[0_0_20px_rgba(234,179,8,0.4)] group-hover:shadow-[0_0_30px_rgba(234,179,8,0.6)] transition-shadow">
-                <span className="text-4xl">✊</span>
+              <div>
+                <div className="w-20 h-20 bg-blue-600 rounded-full mb-6"></div>
+                <h3 className="font-black uppercase text-xl mb-4">Amplify Your Voice</h3>
+                <p className="font-light text-gray-300">
+                  Show legislators and industry leaders that creative workers demand change
+                </p>
               </div>
-              <h3 className="font-bold text-yellow-400 mb-2 text-lg">Drive Real Change</h3>
-              <p className="text-sm text-gray-300">
-                Help make A-Corp legislation a reality and transform how artists do business
-              </p>
+
+              <div>
+                <div className="w-20 h-20 bg-yellow-400 rotate-45 mb-6"></div>
+                <h3 className="font-black uppercase text-xl mb-4">Drive Real Change</h3>
+                <p className="font-light text-gray-300">
+                  Help make A-Corp legislation a reality and transform how artists do business
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* FAQ Preview */}
-        <div className="text-center">
-          <p className="text-sm text-gray-400 mb-2 font-mono">NEED MORE INFO?</p>
-          <Link href="/get-involved" className="text-cyan-400 hover:text-pink-400 font-bold transition-colors">
-            Learn more about getting involved →
-          </Link>
+        <div className="text-center py-8">
+          <div className="inline-flex items-center gap-4 bg-white border-4 border-black px-8 py-4">
+            <div className="w-4 h-4 bg-red-600 rounded-full"></div>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider mb-1">Need More Info?</p>
+              <Link href="/get-involved" className="font-black text-lg hover:text-red-600 transition-colors">
+                Get Involved →
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
