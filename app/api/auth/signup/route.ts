@@ -5,7 +5,19 @@ import bcrypt from 'bcryptjs';
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { email, password, name } = body;
+    const {
+      email,
+      password,
+      name,
+      bio,
+      location,
+      projectName,
+      projectDescription,
+      entityType,
+      genre,
+      members,
+      catalogue
+    } = body;
 
     if (!email || !password || !name) {
       return NextResponse.json(
@@ -31,18 +43,73 @@ export async function POST(request: Request) {
     // Hash password
     const passwordHash = await bcrypt.hash(password, 12);
 
-    // Create user
-    const user = await prisma.user.create({
-      data: {
-        email,
-        name,
-        passwordHash,
-        emailVerified: false,
-      },
+    // Create user with profile and project in a transaction
+    const result = await prisma.$transaction(async (tx) => {
+      // Create user
+      const user = await tx.user.create({
+        data: {
+          email,
+          name,
+          passwordHash,
+        },
+      });
+
+      // Create user profile if bio or location provided
+      if (bio || location) {
+        await tx.userProfile.create({
+          data: {
+            userId: user.id,
+            bio: bio || null,
+            location: location || null,
+          },
+        });
+      }
+
+      // Create project if project data provided
+      if (projectName && projectDescription && entityType) {
+        const project = await tx.project.create({
+          data: {
+            name: projectName,
+            description: projectDescription,
+            entityType: entityType,
+            genre: genre ? [genre] : [],
+            ownerId: user.id,
+            catalogueData: catalogue && catalogue.length > 0 ? catalogue : null,
+          },
+        });
+
+        // Create project members if provided
+        if (members && members.length > 0) {
+          for (const member of members) {
+            if (member.name && member.role) {
+              await tx.projectMember.create({
+                data: {
+                  projectId: project.id,
+                  name: member.name,
+                  role: member.role,
+                },
+              });
+
+              // Create ownership breakdown if ownership percentage provided
+              if (member.ownership > 0) {
+                await tx.ownershipBreakdown.create({
+                  data: {
+                    projectId: project.id,
+                    memberName: member.name,
+                    percentage: member.ownership,
+                  },
+                });
+              }
+            }
+          }
+        }
+      }
+
+      return user;
     });
 
     // Remove sensitive data
-    const { passwordHash: _, ...userWithoutPassword } = user;
+    const { passwordHash: _, ...userWithoutPassword } = result;
 
     return NextResponse.json(userWithoutPassword, { status: 201 });
   } catch (error) {

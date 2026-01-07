@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
 import { Button } from '@/components/shared/Button';
 
 type FormData = {
@@ -75,8 +76,59 @@ export default function SignupPage() {
   };
 
   const handleSubmit = async () => {
-    // TODO: Implement API call to create account
-    console.log('Form submitted:', formData);
+    try {
+      // Validate passwords match
+      if (formData.password !== formData.confirmPassword) {
+        alert('Passwords do not match');
+        return;
+      }
+
+      // Call signup API
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+          name: formData.name,
+          bio: formData.bio,
+          location: formData.location,
+          projectName: formData.projectName,
+          projectDescription: formData.projectDescription,
+          entityType: formData.entityType,
+          genre: formData.genre,
+          members: formData.members,
+          catalogue: formData.catalogue,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.error || 'Failed to create account');
+        return;
+      }
+
+      // Success - auto-login the user
+      const result = await signIn('credentials', {
+        email: formData.email,
+        password: formData.password,
+        redirect: false,
+      });
+
+      if (result?.ok) {
+        // Redirect to dashboard with welcome parameter
+        window.location.href = '/dashboard?welcome=true';
+      } else {
+        // If auto-login fails, redirect to login page
+        window.location.href = '/login?registered=true';
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   return (

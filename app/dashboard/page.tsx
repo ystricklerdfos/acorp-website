@@ -8,17 +8,29 @@ import { Badge } from '@/components/ui/badge';
 interface Project {
   id: string;
   name: string;
+  description: string;
   entityType: string;
+  genre: string[];
   status: string;
+  catalogueData?: any;
   financialModel?: { valuation?: number };
   documents?: any[];
   members?: any[];
+  ownership?: any[];
+}
+
+interface UserProfile {
+  bio?: string;
+  location?: string;
+  website?: string;
 }
 
 export default function DashboardOverview() {
   const { data: session } = useSession();
   const [projects, setProjects] = useState<Project[]>([]);
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showWelcome, setShowWelcome] = useState(false);
   const [stats, setStats] = useState({
     projectCount: 0,
     documentCount: 0,
@@ -28,6 +40,15 @@ export default function DashboardOverview() {
 
   useEffect(() => {
     fetchProjects();
+    fetchUserProfile();
+
+    // Check if user just signed up (show welcome modal)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('welcome') === 'true') {
+      setShowWelcome(true);
+      // Remove the query param
+      window.history.replaceState({}, '', '/dashboard');
+    }
   }, []);
 
   const fetchProjects = async () => {
@@ -57,6 +78,18 @@ export default function DashboardOverview() {
     }
   };
 
+  const fetchUserProfile = async () => {
+    try {
+      const response = await fetch('/api/user/profile');
+      if (response.ok) {
+        const data = await response.json();
+        setUserProfile(data);
+      }
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+    }
+  };
+
   const getStatusBadge = (status: string) => {
     const variants: { [key: string]: 'default' | 'success' | 'warning' | 'danger' | 'info' } = {
       DRAFT: 'warning',
@@ -77,6 +110,84 @@ export default function DashboardOverview() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Welcome Modal */}
+      {showWelcome && projects.length > 0 && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-2xl w-full p-8">
+            <div className="text-center mb-6">
+              <div className="text-6xl mb-4">🎉</div>
+              <h2 className="text-3xl font-bold text-foreground mb-2">
+                Welcome to Your Dashboard!
+              </h2>
+              <p className="text-secondary text-lg">
+                Your account has been created successfully
+              </p>
+            </div>
+
+            {projects[0] && (
+              <div className="bg-gray-50 rounded-lg p-6 mb-6">
+                <h3 className="font-bold text-lg mb-4">Your Project: {projects[0].name}</h3>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <span className="text-secondary">Entity Type:</span>
+                    <div className="font-medium">{projects[0].entityType}</div>
+                  </div>
+                  <div>
+                    <span className="text-secondary">Genre:</span>
+                    <div className="font-medium">{projects[0].genre.join(', ') || 'Not specified'}</div>
+                  </div>
+                  <div>
+                    <span className="text-secondary">Team Members:</span>
+                    <div className="font-medium">{projects[0].members?.length || 0}</div>
+                  </div>
+                  <div>
+                    <span className="text-secondary">Status:</span>
+                    <div className="font-medium">{projects[0].status}</div>
+                  </div>
+                </div>
+                {projects[0].description && (
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <span className="text-secondary text-sm">Description:</span>
+                    <p className="text-sm mt-1">{projects[0].description}</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="space-y-3">
+              <h4 className="font-semibold text-sm text-secondary">Next Steps:</h4>
+              <ul className="space-y-2 text-sm">
+                <li className="flex items-start gap-2">
+                  <span className="text-green-600 mt-1">✓</span>
+                  <span>Explore your dashboard and project details</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">→</span>
+                  <span>Connect external accounts (Spotify, Stripe, etc.)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">→</span>
+                  <span>Run the fiscal assessment tool</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-blue-600 mt-1">→</span>
+                  <span>Generate legal documents for your entity</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="mt-6">
+              <button
+                onClick={() => setShowWelcome(false)}
+                className="w-full py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition font-medium"
+              >
+                Get Started
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className="bg-white border-b border-gray-200 px-8 py-4">
         <div className="flex items-center justify-between">
