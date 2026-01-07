@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { useSession, signOut } from 'next-auth/react';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { data: session, status } = useSession();
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
@@ -15,7 +17,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             <Link href="/programs" className="text-gray-700 hover:text-primary transition-colors">
               Programs
             </Link>
@@ -28,9 +30,28 @@ export function Header() {
             <Link href="/get-involved" className="text-gray-700 hover:text-primary transition-colors">
               Get Involved
             </Link>
-            <Link href="/signup" className="text-primary font-medium hover:underline">
-              Sign Up
-            </Link>
+            {session ? (
+              <>
+                <Link href="/dashboard" className="text-primary font-medium hover:underline">
+                  Dashboard
+                </Link>
+                <button
+                  onClick={() => signOut({ callbackUrl: '/' })}
+                  className="text-gray-700 hover:text-primary transition-colors"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className="text-gray-700 hover:text-primary transition-colors">
+                  Sign In
+                </Link>
+                <Link href="/signup" className="text-primary font-medium hover:underline">
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -94,13 +115,43 @@ export function Header() {
             >
               Get Involved
             </Link>
-            <Link
-              href="/signup"
-              className="block py-2 text-primary font-medium"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Sign Up
-            </Link>
+            {session ? (
+              <>
+                <Link
+                  href="/dashboard"
+                  className="block py-2 text-primary font-medium"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    signOut({ callbackUrl: '/' });
+                  }}
+                  className="block py-2 text-gray-700 hover:text-primary w-full text-left"
+                >
+                  Sign Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="block py-2 text-gray-700 hover:text-primary"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/signup"
+                  className="block py-2 text-primary font-medium"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
         )}
       </nav>

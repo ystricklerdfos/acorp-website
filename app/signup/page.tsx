@@ -349,14 +349,14 @@ export default function SignupPage() {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent"
                 >
                   <option value="">Select entity type</option>
-                  <option value="INDIVIDUAL">Individual / Sole Proprietor</option>
+                  <option value="SOLE_PROPRIETORSHIP">Sole Proprietorship</option>
                   <option value="LLC">LLC</option>
                   <option value="S_CORP">S-Corp</option>
                   <option value="C_CORP">C-Corp</option>
-                  <option value="NONPROFIT">Nonprofit</option>
+                  <option value="PARTNERSHIP">Partnership</option>
                   <option value="COOPERATIVE">Cooperative</option>
                   <option value="A_CORP">Artist Corporation (A-Corp)</option>
-                  <option value="NOT_FORMED">Not Yet Formed</option>
+                  <option value="OTHER">Other / Not Yet Formed</option>
                 </select>
               </div>
 
