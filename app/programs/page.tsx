@@ -50,6 +50,26 @@ export default function ProgramsPage() {
               Learn more →
             </Link>
           </Card>
+
+          <Card>
+            <h2 className="text-2xl font-serif font-bold mb-4">A-Corp Dashboard</h2>
+            <p className="text-gray-700 mb-4">
+              Manage your creative projects, track financials, and organize your team in one place.
+            </p>
+            <Link href="/dashboard" className="text-accent hover:underline">
+              Try the dashboard →
+            </Link>
+          </Card>
+
+          <Card>
+            <h2 className="text-2xl font-serif font-bold mb-4">Project Calculator</h2>
+            <p className="text-gray-700 mb-4">
+              Calculate your project's valuation, forecast growth, and model financial scenarios in real-time.
+            </p>
+            <Link href="/demo/calculator" className="text-accent hover:underline">
+              Try the calculator →
+            </Link>
+          </Card>
         </div>
       </div>
     </div>
