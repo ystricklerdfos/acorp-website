@@ -273,7 +273,7 @@ export default function PledgePage() {
                   <option value="advocate">Advocate / Organizer</option>
                   <option value="other">Other</option>
                 </select>
-              </div>
+                </div>
 
                 <div className="flex items-start gap-4 pt-2">
                   <input
@@ -309,6 +309,7 @@ export default function PledgePage() {
             </form>
           </div>
         </div>
+      </div>
 
         {/* Why Sign Section */}
         <div className="bg-black text-white p-12 mb-12 relative">

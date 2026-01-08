@@ -122,8 +122,17 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-8">
             Watch the TED Talk
           </h2>
-          <div className="aspect-video bg-gray-300 rounded-lg flex items-center justify-center">
-            <p className="text-gray-600">[TED Talk Video Placeholder]</p>
+          <div className="aspect-video rounded-lg overflow-hidden">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/iLhFAWKCE0M?start=2"
+              title="Artist Corporations TED Talk"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
           </div>
           <p className="text-center text-gray-600 mt-6">
             Learn about the vision behind Artist Corporations
